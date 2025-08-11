@@ -1,7 +1,20 @@
-from more_itertools import sliced, substrings
+from more_itertools import (
+    chunked as _chunked,
+    sliced as _sliced,
+    flatten as _flatten
+)
 
-subs = ["".join(s) for s in substrings("more")]
-print(subs)
+# Реэкспортируем с удобными именами
+def chunked(iterable, n):
+    """Разбивает iterable на чанки по n элементов."""
+    return list(_chunked(iterable, n))
 
-slices = list(sliced((1, 2, 3, 4, 5, 6, 7, 8), 3))
-print(slices)
+def sliced(sequence, n):
+    """Разбивает sequence на срезы по n элементов."""
+    return list(_sliced(sequence, n))
+
+def flatten(iterable):
+    """Рекурсивно выравнивает вложенные iterable."""
+    return list(_flatten(iterable))
+
+__all__ = ["chunked", "sliced", "flatten"]  
